@@ -3,7 +3,6 @@
 - This is the stable version of the game.
 - Only tested, functional, and integrated features should be merged here.
 - Everyone should pull from this branch regularly to stay up-to-date.
-- *Main branch should only be used to create stable releases after a successful test.*
 ## Feature Branches:
 - **Environment Branch (environment)**: For the environment artist to work on scenes, level design, lighting, and other environment-related tasks.
 - **Mechanics Branch (mechanics)**: For the programmer to develop game mechanics and scripts.
