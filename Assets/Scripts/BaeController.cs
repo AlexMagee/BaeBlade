@@ -65,10 +65,15 @@ public class BaeController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.contacts[0].point.y < transform.position.y)
+        if(!grounded && collision.contacts[0].point.y < transform.position.y)
         {
             grounded = true;
             GetComponent<AudioSource>().Play();
         }
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        OnCollisionEnter(collision);
     }
 }
