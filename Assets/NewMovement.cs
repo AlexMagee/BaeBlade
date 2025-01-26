@@ -5,6 +5,15 @@ public class NewMovement : MonoBehaviour
 {
     public float spinSpeed = 0f;
     public float moveSpeed = 0f;
+    private float angle = 0f;
+    private CharacterController controller;
+    private Transform cameraPivot;
+
+    void Start()
+    {
+        controller = GetComponent<CharacterController>();
+        cameraPivot = transform.GetChild(0);
+    }
 
     void Update()
     {
@@ -16,11 +25,15 @@ public class NewMovement : MonoBehaviour
         }
         // Get move value
         Vector2 move = gamepad.leftStick.ReadValue();
-        // Make rotation
-        transform.Rotate(Vector3.up * spinSpeed * move.x * Time.deltaTime, Space.Self);
-        // Calculate forward motion
-        Vector3 motion = Vector3.forward * moveSpeed * ((move.y * 0.5f) + 1) * Time.deltaTime;
+        // Create rotation quaternion
+        Quaternion _rot = Quaternion.AngleAxis((move.x * spinSpeed * Time.deltaTime) + angle, Vector3.up);
+        // Create movement vector
+        Vector3 _dir = _rot * Vector3.forward * moveSpeed * ((move.y * 0.5f) + 1) * Time.deltaTime;
+        // Store angle for next update
+        angle = _rot.eulerAngles.y;
         // Apply forward motion
-        transform.Translate(motion, Space.Self);
+        controller.Move(_dir);
+        // Pivot camera
+        cameraPivot.rotation = _rot;
     }
 }
