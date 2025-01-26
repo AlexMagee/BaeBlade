@@ -19,7 +19,7 @@ public class NewMovement : MonoBehaviour
         // Make rotation
         transform.Rotate(Vector3.up * spinSpeed * move.x * Time.deltaTime, Space.Self);
         // Calculate forward motion
-        Vector3 motion = Vector3.forward * moveSpeed * Time.deltaTime;
+        Vector3 motion = Vector3.forward * moveSpeed * ((move.y * 0.5f) + 1) * Time.deltaTime;
         // Apply forward motion
         transform.Translate(motion, Space.Self);
     }
